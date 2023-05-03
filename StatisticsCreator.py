@@ -8,6 +8,7 @@ class StatisticsCreator:
 
 	def calculate_statistic(self):
 		for element in self.ingrediences:
+			#splitted = element.split(" ")
 			if element in self.ingredinces_values:
 				self.ingredinces_values[element] += 1
 			else:
