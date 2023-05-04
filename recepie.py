@@ -25,7 +25,8 @@ class Recepie:
 		toReturn += "\n"
 
 		toReturn += "instructions: \n"
-		toReturn += self.instructions
+		for element in self.instructions:
+			toReturn += element + " "
 		toReturn += "\n"
 		toReturn += "\n"
 
