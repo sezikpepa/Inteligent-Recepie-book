@@ -2,6 +2,7 @@ from Recepie_Creator import Recepie_Creator
 from IngredienceTaker import IngredienceTaker
 from StatisticsCreator import StatisticsCreator
 from MakingProcessMaker import MakingProcessMaker
+from Reccomender import Recommender
 import pprint
 import numpy as np
 
@@ -33,9 +34,47 @@ if __name__ == '__main__':
 		recepie_creator.recepies[i].instructions = process_maker.processes
 		recepie_creator.recepies[i].ingredience = ingredience_taker.ingredience
 
-	for i in range(repeat):
-		print(recepie_creator.recepies[i])
-		print("-----------------------------------------------------------------------------")
+	print("loaded")
+	#print(recepie_creator.recepies[247])
+
+
+	recommender = Recommender(recepie_creator.recepies)
+	recepie1 = {"test" : 0.2, "test2": 1}
+	recepie2 = {"test" : 1}
+
+	result = recommender.compare_recepies(recepie1, recepie2)
+	print(result)
+
+	#succesful recommendation--------------------------------------------------------
+	# recommender = Recommender(recepie_creator.recepies)
+	
+	# matching_pattern = {"olive oil": 0.5,
+	# 					"bonein": 1,
+	# 					"unbleached all purpose flour": 1,
+	# 					"ginger": 0.1,
+	# 					"leafy herbs": 1,
+	# 					"salt": 1,
+	# 					"swanson chicken broth": 1,
+	# 					"noodles": 1,
+	# 					"garlic": 1}
+	# score, recepie, no_data = recommender.get_recommendation(matching_pattern, 6)
+
+	# print(f"score {score}")
+	# print(f"no data: {no_data}")
+	# print(recepie)
+
+	# recepie.generate_vector()
+	# print(recepie.vector)
+	#--------------------------------------------
+
+
+
+
+
+
+	#for i in range(repeat):
+		#print(recepie_creator.recepies[i])
+		#print("-----------------------------------------------------------------------------")
 
 	# for i in range(10000):
 	# 	process_maker = MakingProcessMaker(recepie_creator.recepies[i].instructions.split(" "))
