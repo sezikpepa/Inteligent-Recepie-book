@@ -74,6 +74,18 @@ class Main_window(QMainWindow):
 		self.show_recepie(self.original_recepies[recepie_number])	
 		self.current_recepie_number = recepie_number	
 
+		self.enable_stars_buttons()
+
+	def enable_stars_buttons(self):
+		self.stars_bad.setEnabled(True)
+		self.stars_neutral.setEnabled(True)
+		self.stars_good.setEnabled(True)
+
+	def disable_stars_buttons(self):
+		self.stars_bad.setEnabled(False)
+		self.stars_neutral.setEnabled(False)
+		self.stars_good.setEnabled(False)
+
 	def insert_ratings(self, ingredients, rating):
 		for element in ingredients:
 			self.ingredients_values.add_rating(element, rating)
@@ -91,7 +103,7 @@ class Main_window(QMainWindow):
 		result = self.ingredients_values.get_favouritness()
 		keys = list(result.keys())
 		values = list(result.values())
-		sorted_value_index = np.argsort(values)[::-1][:7]
+		sorted_value_index = np.argsort(values)[::-1][:15]
 		sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
 
 		textToShow = ""
@@ -114,13 +126,17 @@ class Main_window(QMainWindow):
 		elif text == "bad":
 			rating = 0
 
+		self.stars_bad.setEnabled(False)
+		self.stars_neutral.setEnabled(False)
+		self.stars_good.setEnabled(False)
+
 		self.insert_ratings(self.recepie_creator.recepies[self.current_recepie_number].ingredience, rating)
 		self.show_ingredience_values()
 
 
 	def basic_setup(self):
 		self.setWindowTitle("Inteligent recepie book")
-		self.setFixedSize(1500, 1000)
+		self.setFixedSize(1500, 1300)
 
 	def layout_setup(self):		
 		self.ui_recepie.name_widget = QLabel()
@@ -165,16 +181,16 @@ class Main_window(QMainWindow):
 		self.top_ingrediences = QLabel()
 		self.top_ingrediences.setText("tady budou top ingredience")
 
-		stars_good = QRadioButton("good", self)
-		stars_good.toggled.connect(self.rating_inserted)
+		self.stars_good = QPushButton("good", self)
+		self.stars_good.clicked.connect(self.rating_inserted)
 
-		stars_neutral = QRadioButton("neutral", self)
-		stars_neutral.toggled.connect(self.rating_inserted)
+		self.stars_neutral = QPushButton("neutral", self)
+		self.stars_neutral.clicked.connect(self.rating_inserted)
 
-		stars_bad = QRadioButton("bad", self)
-		stars_bad.toggled.connect(self.rating_inserted)
+		self.stars_bad = QPushButton("bad", self)
+		self.stars_bad.clicked.connect(self.rating_inserted)
 
-
+		self.disable_stars_buttons()
 
 
 
@@ -182,9 +198,9 @@ class Main_window(QMainWindow):
 		buttons_layout.addWidget(get_recommendation_button)
 		buttons_layout.addWidget(self.get_random_button)
 
-		buttons_layout.addWidget(stars_good)
-		buttons_layout.addWidget(stars_neutral)
-		buttons_layout.addWidget(stars_bad)
+		buttons_layout.addWidget(self.stars_good)
+		buttons_layout.addWidget(self.stars_neutral)
+		buttons_layout.addWidget(self.stars_bad)
 
 
 		buttons = QWidget()
