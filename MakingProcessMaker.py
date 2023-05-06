@@ -2,6 +2,9 @@ class MakingProcessMaker:
 	def __init__(self, processes) -> None:
 		self.processes = processes
 
+	def do_magic(self):
+		self.remove_nonletters()
+		self.remove_words_without_meaning()
 
 
 	def remove_nonletters(self):

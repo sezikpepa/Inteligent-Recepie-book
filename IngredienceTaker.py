@@ -4,6 +4,18 @@ class IngredienceTaker:
 	def __init__(self, ingredience: list) -> None:
 		self.ingredience = ingredience 
 
+	def do_magic(self):
+		self.remove_things_in_brackets()
+		self.remove_after()
+		self.to_lower_case()
+		self.remove_non_letters()
+		self.split_ingredients()
+		self.remove_nonneeded_words()
+		self.remove_white_speces_around()
+		self.remove_duplicities()
+		self.remove_white_speces_around()
+		self.remove_long_ingredience()
+		self.connect_possible_connections()
 
 	def remove_things_in_brackets(self):
 		new_list = []
