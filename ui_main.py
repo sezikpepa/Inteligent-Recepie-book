@@ -2,8 +2,8 @@
 import sys
  
 # import PySide2 modules
-from PySide2.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QRadioButton
-from PySide2.QtGui import QPalette, QColor, QPixmap
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QRadioButton
+from PySide6.QtGui import QPalette, QColor, QPixmap
 
 from Recepie_Creator import Recepie_Creator
 from IngredienceTaker import IngredienceTaker
@@ -17,7 +17,9 @@ from favourite_ingredience import Favourite_ingrediences
 
 from random import randint
 from copy import deepcopy
-from PySide2.QtCore import Qt
+from PySide6.QtCore import Qt
+
+import settings
 
 
 class Color(QWidget):
@@ -48,9 +50,12 @@ class Main_window(QMainWindow):
 		self.ui_recepie = UI_Recepie()
 		self.recepie_creator = Recepie_Creator()
 
+		self.recommender = None
+
 		self.original_recepies = []
 
-		self.recepie_creator.LoadFile("C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "dataset_small.csv")
+		#self.recepie_creator.LoadFile("C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "dataset_small.csv")
+		self.recepie_creator.LoadFile(settings.dataset)
 
 		self.ingredients_values = Favourite_ingrediences()
 
@@ -69,9 +74,19 @@ class Main_window(QMainWindow):
 			self.recepie_creator.recepies[i].instructions = process_maker.processes
 			self.recepie_creator.recepies[i].ingredience = ingredience_taker.ingredience
 
+		self.recommender = Recommender(self.recepie_creator.recepies)
+
 	def on_get_random_recepie_button(self):
 		recepie_number = randint(0, len(self.original_recepies) - 1)
 		self.show_recepie(self.original_recepies[recepie_number])	
+		self.current_recepie_number = recepie_number	
+
+		self.enable_stars_buttons()
+
+	def on_get_recommended_recepie_button(self):
+		score, recepie, no_data = self.recommender.get_recommendation(self.ingredients_values, 4)
+
+		self.show_recepie(recepie)	
 		self.current_recepie_number = recepie_number	
 
 		self.enable_stars_buttons()
@@ -95,7 +110,9 @@ class Main_window(QMainWindow):
 		self.ui_recepie.ingredience_widget.setText(str(Ingrediences(recepie.ingredience)))
 		self.ui_recepie.instructions_widget.setText(str(recepie.instructions))
 
-		image = QPixmap(f"C:\\Users\sezik\OneDrive - Univerzita Karlova\\projekty\Inteligent-Recepie-book\\archive\\Food Images\\Food Images\\{recepie.image_name}")
+		#image = QPixmap(f"C:\\Users\sezik\OneDrive - Univerzita Karlova\\projekty\Inteligent-Recepie-book\\archive\\Food Images\\Food Images\\{recepie.image_name}")
+		image = QPixmap(f"C:\\Users\\z004s7sv\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\Food Images\\Food Images\\{recepie.image_name}")
+
 		self.ui_recepie.image.setText(recepie.image_name)
 		self.ui_recepie.image.setPixmap(image)
 
@@ -136,7 +153,7 @@ class Main_window(QMainWindow):
 
 	def basic_setup(self):
 		self.setWindowTitle("Inteligent recepie book")
-		self.setFixedSize(1500, 1300)
+		self.setFixedSize(900, 600)
 
 	def layout_setup(self):		
 		self.ui_recepie.name_widget = QLabel()
@@ -236,4 +253,4 @@ mainwindow.show_ingredience_values()
 mainwindow.show()
  
 # to kee in loop invoke exec_() function
-app.exec_()
+app.exec()

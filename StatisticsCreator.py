@@ -1,6 +1,7 @@
 class StatisticsCreator:
 	def __init__(self) -> None:
 		self.ingrediences = []
+		self.words = {}
 		self.ingredinces_values = {}
 
 	def add(self, ingrediences):
@@ -13,6 +14,14 @@ class StatisticsCreator:
 				self.ingredinces_values[element] += 1
 			else:
 				self.ingredinces_values[element] = 1
+
+	def calculate_word_count(self):
+		for element in self.ingrediences:
+			for part in element.split(" "):
+				if part in self.words:
+					self.words[part] += 1
+				else:
+					self.words[part] = 1
 	
 	# def __str__(self):
 	# 	toReturn = ""

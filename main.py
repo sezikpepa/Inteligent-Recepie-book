@@ -5,45 +5,75 @@ from MakingProcessMaker import MakingProcessMaker
 from Reccomender import Recommender
 import pprint
 import numpy as np
+import settings
 
 if __name__ == '__main__':
 	recepie_creator = Recepie_Creator()
 
-	recepie_creator.LoadFile("C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "dataset_small.csv")
+	recepie_creator.LoadFile(settings.dataset)
+	statistics = StatisticsCreator()
 
-	repeat = 1000
+	repeat = len(recepie_creator.recepies)
 	for i in range(repeat):
 		process_maker = MakingProcessMaker(recepie_creator.recepies[i].instructions.split(" "))
 		ingredience_taker = IngredienceTaker(recepie_creator.recepies[i].ingredience)
 
-		ingredience_taker.remove_things_in_brackets()
-		ingredience_taker.remove_after()
-		ingredience_taker.to_lower_case()
-		ingredience_taker.remove_non_letters()
-		ingredience_taker.split_ingredients()
-		ingredience_taker.remove_nonneeded_words()
-		ingredience_taker.remove_white_speces_around()
-		ingredience_taker.remove_duplicities()
-		ingredience_taker.remove_white_speces_around()
-		ingredience_taker.remove_long_ingredience()
-		ingredience_taker.connect_possible_connections()
-
-		process_maker.remove_nonletters()
-		process_maker.remove_words_without_meaning()
+		ingredience_taker.do_magic()
+		process_maker.do_magic()
 
 		recepie_creator.recepies[i].instructions = process_maker.processes
 		recepie_creator.recepies[i].ingredience = ingredience_taker.ingredience
 
+		
+
+
 	print("loaded")
+
+	for recepie in recepie_creator.recepies:
+		statistics.add(recepie.ingredience)
+	
+
+
+	statistics.calculate_statistic()
+	statistics.calculate_word_count()
+
+	""" pprint.pprint(statistics.ingredinces_values)
+	print(len(statistics.ingredinces_values)) """
+
+	""" pprint.pprint(statistics.words)
+	print(len(statistics.words)) """
+
+	keys = list(statistics.words.keys())
+	values = list(statistics.words.values())
+	sorted_value_index = np.argsort(values)
+	sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
+
+	print(sorted_dict)
+	print("single words: " + str(len(sorted_dict)))
+	print("ingredience_count: " + str(len(statistics.ingredinces_values)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	#print(recepie_creator.recepies[247])
 
 
-	recommender = Recommender(recepie_creator.recepies)
+""" 	recommender = Recommender(recepie_creator.recepies)
 	recepie1 = {"test" : 0.2, "test2": 1}
 	recepie2 = {"test" : 1}
 
 	result = recommender.compare_recepies(recepie1, recepie2)
-	print(result)
+	print(result) """
 
 	#succesful recommendation--------------------------------------------------------
 	# recommender = Recommender(recepie_creator.recepies)
