@@ -1,4 +1,5 @@
 from math import sqrt
+from recepie import Recepie
 
 class Recommender:
 	def __init__(self, recepies) -> None:
@@ -7,40 +8,48 @@ class Recommender:
 
 	def get_recommendation(self, matching_pattern, minimum_ingrediences):
 		max_value = 0
-		that_recepie = None
+		that_recepie = 0
 		that_no_data = 0
-		for recepie in self.recepies:
-			value, count, no_data = self.calculate_similarity_ingrediences(recepie, matching_pattern)
-			if count > 0:
-				if value / count > max_value and no_data < 4 and count + no_data >= minimum_ingrediences:
-					max_value = value / count
-					that_recepie = recepie
-					that_no_data = no_data
+		for i in range(len(self.recepies)):
+			#value, count, no_data = self.calculate_similarity_ingrediences(self.recepies[i], matching_pattern)
+
+			# if count > 0:
+			# 	if value / count > max_value: #and no_data < 4 and count + no_data >= minimum_ingrediences:
+			# 		max_value = value / count
+			# 		that_recepie = i
+			# 		that_no_data = no_data
+
+			value = self.compare_recepies(matching_pattern, self.recepies[i])
+			if max_value < value:
+				max_value = value
+				that_recepie = i
+
 		return [max_value, that_recepie, that_no_data]
 	
-	def compare_recepies(self, recepie1, recepie2):
+	def compare_recepies(self, matching_pattern: dict, recepie: Recepie):
 		numerator = 0
 		denominator = 0
 
 		keys = []
-		keys += list(recepie1.keys())
-		keys += list(recepie2.keys())
+		keys += list(matching_pattern.sums.keys())
+		keys += recepie.ingredience
 
 		keys = list(set(keys))
 
 		for key in keys:
-			if key in recepie1 and key in recepie2:
-				numerator += recepie1[key] * recepie2[key]
+			print(type(matching_pattern))
+			if key in recepie.ingredience and key in matching_pattern:
+				numerator += recepie[key] * (matching_pattern.sums[key] / matching_pattern.counts[key])
 		
 		#----------------------------------------------
 		valuex = 0
-		for key in recepie1:
-			valuex += recepie1[key] ** 2
+		for key in matching_pattern:
+			valuex += (matching_pattern.sums[key] / matching_pattern.counts[key]) ** 2
 		valuex = sqrt(valuex)
 
 		valuey = 0
-		for key in recepie2:
-			valuey += recepie2[key] ** 2
+		for key in recepie:
+			valuey += recepie[key] ** 2
 		valuey = sqrt(valuey)
 
 		denominator = valuex * valuey
@@ -52,6 +61,8 @@ class Recommender:
 		value = 0
 		count = 0
 		no_data = 0
+		print("matching_pattern:")
+		print(matching_pattern)
 		for element in recepie.ingredience:
 			try:
 				value += matching_pattern[element]

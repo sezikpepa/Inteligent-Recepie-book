@@ -1,4 +1,4 @@
-class Favourite_ingrediences:
+class Favourite_ingredience:
 	def __init__(self):
 		self.sums = {}
 		self.counts = {}

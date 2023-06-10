@@ -13,7 +13,7 @@ from Reccomender import Recommender
 import pprint
 import numpy as np
 from Ingredience import Ingrediences
-from favourite_ingredience import Favourite_ingrediences
+from favourite_ingredience import Favourite_ingredience
 
 from random import randint
 from copy import deepcopy
@@ -57,7 +57,7 @@ class Main_window(QMainWindow):
 		#self.recepie_creator.LoadFile("C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "dataset_small.csv")
 		self.recepie_creator.LoadFile(settings.dataset)
 
-		self.ingredients_values = Favourite_ingrediences()
+		self.ingredients_values = Favourite_ingredience() #tady to bude problém
 
 		self.current_recepie_number = None
 
@@ -84,10 +84,11 @@ class Main_window(QMainWindow):
 		self.enable_stars_buttons()
 
 	def on_get_recommended_recepie_button(self):
+		print("yes")
 		score, recepie, no_data = self.recommender.get_recommendation(self.ingredients_values, 4)
-
-		self.show_recepie(recepie)	
-		self.current_recepie_number = recepie_number	
+		print(recepie)
+		self.show_recepie(self.original_recepies[recepie])	
+		self.current_recepie_number = recepie	
 
 		self.enable_stars_buttons()
 
@@ -110,8 +111,8 @@ class Main_window(QMainWindow):
 		self.ui_recepie.ingredience_widget.setText(str(Ingrediences(recepie.ingredience)))
 		self.ui_recepie.instructions_widget.setText(str(recepie.instructions))
 
-		#image = QPixmap(f"C:\\Users\sezik\OneDrive - Univerzita Karlova\\projekty\Inteligent-Recepie-book\\archive\\Food Images\\Food Images\\{recepie.image_name}")
-		image = QPixmap(f"C:\\Users\\z004s7sv\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\Food Images\\Food Images\\{recepie.image_name}")
+
+		image = QPixmap(f"{settings.images_path}{recepie.image_name}")
 
 		self.ui_recepie.image.setText(recepie.image_name)
 		self.ui_recepie.image.setPixmap(image)
@@ -190,6 +191,7 @@ class Main_window(QMainWindow):
 
 		get_recommendation_button = QPushButton()
 		get_recommendation_button.setText("Get recommendation")
+		get_recommendation_button.clicked.connect(self.on_get_recommended_recepie_button)
 
 		self.get_random_button = QPushButton()
 		self.get_random_button.setText("Get random recepie")
@@ -253,4 +255,4 @@ mainwindow.show_ingredience_values()
 mainwindow.show()
  
 # to kee in loop invoke exec_() function
-app.exec()
+app.exec_()
