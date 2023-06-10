@@ -13,11 +13,13 @@ from Reccomender import Recommender
 import pprint
 import numpy as np
 from Ingredience import Ingrediences
-from favourite_ingredience import Favourite_ingredience
+from favourite_ingredience import Favourite_ingrediences
 
 from random import randint
 from copy import deepcopy
 from PySide6.QtCore import Qt
+
+from recepie import Recepie
 
 import settings
 
@@ -57,7 +59,7 @@ class Main_window(QMainWindow):
 		#self.recepie_creator.LoadFile("C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "dataset_small.csv")
 		self.recepie_creator.LoadFile(settings.dataset)
 
-		self.ingredients_values = Favourite_ingredience() #tady to bude problém
+		self.ingredients_values = Favourite_ingrediences() #tady to bude problém
 
 		self.current_recepie_number = None
 
@@ -103,10 +105,16 @@ class Main_window(QMainWindow):
 		self.stars_good.setEnabled(False)
 
 	def insert_ratings(self, ingredients, rating):
+		if not isinstance(rating, int):
+			raise ValueError(f"rating is {type(rating)}")
+
 		for element in ingredients:
 			self.ingredients_values.add_rating(element, rating)
 
 	def show_recepie(self, recepie):
+		if not isinstance(recepie, Recepie):
+			raise ValueError(f"recepie is {type(recepie)}")
+
 		self.ui_recepie.name_widget.setText(recepie.name)
 		self.ui_recepie.ingredience_widget.setText(str(Ingrediences(recepie.ingredience)))
 		self.ui_recepie.instructions_widget.setText(str(recepie.instructions))

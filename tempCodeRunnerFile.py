@@ -1,0 +1,1 @@
+self.ingredients_values

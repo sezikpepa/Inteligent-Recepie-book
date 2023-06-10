@@ -1,5 +1,6 @@
 from math import sqrt
 from recepie import Recepie
+from favourite_ingredience import Favourite_ingrediences
 
 class Recommender:
 	def __init__(self, recepies) -> None:
@@ -27,6 +28,12 @@ class Recommender:
 		return [max_value, that_recepie, that_no_data]
 	
 	def compare_recepies(self, matching_pattern: dict, recepie: Recepie):
+		if not isinstance(recepie, Recepie):
+			raise ValueError(f"recepie is {type(recepie)}")
+		
+		if not isinstance(matching_pattern, Favourite_ingrediences):
+			raise ValueError(f"matching_pattern is {type(matching_pattern)}")
+
 		numerator = 0
 		denominator = 0
 
@@ -37,19 +44,18 @@ class Recommender:
 		keys = list(set(keys))
 
 		for key in keys:
-			print(type(matching_pattern))
-			if key in recepie.ingredience and key in matching_pattern:
-				numerator += recepie[key] * (matching_pattern.sums[key] / matching_pattern.counts[key])
+			if key in recepie.ingredience and key in matching_pattern.sums:
+				numerator += 1 * (matching_pattern.sums[key] / matching_pattern.counts[key])
 		
 		#----------------------------------------------
 		valuex = 0
-		for key in matching_pattern:
+		for key in matching_pattern.sums:
 			valuex += (matching_pattern.sums[key] / matching_pattern.counts[key]) ** 2
 		valuex = sqrt(valuex)
 
 		valuey = 0
-		for key in recepie:
-			valuey += recepie[key] ** 2
+		for key in recepie.ingredience:
+			valuey += 1 ** 2
 		valuey = sqrt(valuey)
 
 		denominator = valuex * valuey
