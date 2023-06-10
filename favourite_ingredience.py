@@ -20,3 +20,19 @@ class Favourite_ingrediences:
 			toReturn[element] = self.sums[element] / self.counts[element]
 
 		return toReturn
+	
+	def save_to_file(self, file_name: str):
+		file = open(file_name, "w")
+		for key in self.sums.keys():
+			to_write = ""
+
+			to_write += key
+			to_write += ";"
+			to_write += str(self.sums[key])
+			to_write += ";"
+			to_write += str(self.counts[key])
+			to_write += "\n"
+
+			file.write(to_write)
+
+		file.close()

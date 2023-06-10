@@ -6,3 +6,6 @@
 #dataset = "C:\\Users\\sezik\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "Food Ingredients and Recipe Dataset with Image Name Mapping.csv"
 dataset = "C:\\Users\\sezik\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\archive\\" + "dataset_small.csv" #small
 images_path = "C:\\Users\sezik\OneDrive - Univerzita Karlova\\projekty\Inteligent-Recepie-book\\archive\\Food Images\\Food Images\\"
+
+
+favourite_ingrediences_file_name = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\userData\\" + "favourite_ingrediences_file_name.csv"

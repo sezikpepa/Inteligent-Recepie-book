@@ -86,7 +86,6 @@ class Main_window(QMainWindow):
 		self.enable_stars_buttons()
 
 	def on_get_recommended_recepie_button(self):
-		print("yes")
 		score, recepie, no_data = self.recommender.get_recommendation(self.ingredients_values, 4)
 		print(recepie)
 		self.show_recepie(self.original_recepies[recepie])	
@@ -158,6 +157,8 @@ class Main_window(QMainWindow):
 
 		self.insert_ratings(self.recepie_creator.recepies[self.current_recepie_number].ingredience, rating)
 		self.show_ingredience_values()
+
+		self.ingredients_values.save_to_file(settings.favourite_ingrediences_file_name)
 
 
 	def basic_setup(self):
