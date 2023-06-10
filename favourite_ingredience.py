@@ -1,3 +1,6 @@
+import csv
+
+
 class Favourite_ingrediences:
 	def __init__(self):
 		self.sums = {}
@@ -22,17 +25,23 @@ class Favourite_ingrediences:
 		return toReturn
 	
 	def save_to_file(self, file_name: str):
-		file = open(file_name, "w")
-		for key in self.sums.keys():
-			to_write = ""
+		with open(file_name, "w") as file:
+			csv_writer = csv.writer(file)
+			for key in self.sums.keys():
+				to_write = [key, self.sums[key], self.counts[key]]
+				
+				csv_writer.writerow(to_write)
 
-			to_write += key
-			to_write += ";"
-			to_write += str(self.sums[key])
-			to_write += ";"
-			to_write += str(self.counts[key])
-			to_write += "\n"
 
-			file.write(to_write)
 
-		file.close()
+	def load_from_file(self, file_name: str):
+		with open(file_name, "r") as file:
+			csv_reader = csv.reader(file, delimiter=",")
+
+			self.sums.clear()
+			self.sums.clear()
+
+			for row in csv_reader:
+				if len(row) == 3:
+					self.sums[row[0]] = int(row[1])
+					self.counts[row[0]] = int(row[2])

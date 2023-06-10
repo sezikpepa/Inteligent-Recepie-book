@@ -78,6 +78,9 @@ class Main_window(QMainWindow):
 
 		self.recommender = Recommender(self.recepie_creator.recepies)
 
+
+		self.ingredients_values.load_from_file(settings.favourite_ingrediences_file_name)
+
 	def on_get_random_recepie_button(self):
 		recepie_number = randint(0, len(self.original_recepies) - 1)
 		self.show_recepie(self.original_recepies[recepie_number])	
