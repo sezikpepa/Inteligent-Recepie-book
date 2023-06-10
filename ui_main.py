@@ -107,7 +107,7 @@ class Main_window(QMainWindow):
 		self.stars_good.setEnabled(False)
 
 	def insert_ratings(self, ingredients, rating):
-		if not isinstance(rating, int):
+		if not isinstance(rating, int) and not isinstance(rating, float):
 			raise ValueError(f"rating is {type(rating)}")
 
 		for element in ingredients:
