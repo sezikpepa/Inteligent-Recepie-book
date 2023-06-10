@@ -1,136 +1,89 @@
-butter,4.5,6
-eggs,3.0,4
-flour,3.5,5
-scallions,4,6
-buttermilk,2.5,3
-gruy re,2,2
-sugar,2.0,5
-zucchini,0.5,2
-olive oil,5.0,8
-parmesan cheese,0,1
-salt,6.0,10
-pepper,3.5,6
-beer,0,1
-soda,1.5,2
-ham,1,1
-sea salt,2.5,3
-thyme,1,1
-cumin,1,2
-coriander,1,2
-avocados,1,1
-milk greek yogurt,1,1
-envelope yeast,1,1
-equipment spice mill,1.5,2
-parsley,2,2
-lemon,2,2
-lime juice,1.0,2
-scotch bonnet chiles,0.5,1
-vegetable oil,2.0,4
-sunflower oil,0.5,1
-turmeric,0.5,2
-shallots,1.0,2
-mango,1.0,2
-sugarcane vinegar,0.5,1
-lime,0.5,1
-juice,0.5,1
-plantains,0.5,1
-garlic,3.0,6
-sour cream,0.5,1
-mint,0,1
-kashmiri chile,0,1
-ginger,0.5,2
-cherry tomatoes,0.5,2
-mustard,1.0,3
-sugar snap peas,0,1
-paneer,0,1
-rice,0,1
-bay leaf,1,1
-beef,1,1
-lima beans,1,1
-cabbage,1,1
-allspice berries,1,1
-carrots,1,1
-idaho potatoes,1,1
-beets,1,1
-vinegar,1,1
-peppercorns,1.5,2
-pork butt,1,1
-celery stalks,1,1
-crystal,1.5,2
-fermented garlic honey,0.5,1
-chicken,0.5,1
-champagne vinegar,1.0,2
-fresno chiles,0.5,1
-juice  lemon,1,1
-sodium chicken broth,1,1
-capers,1,1
-tender herb,1,1
-grain rice,1,1
-pepper flakes,1,1
-oil anchovy fillet,1,1
-lemon juice,1.5,2
-soda water,0.5,1
-ros wine,0.5,1
-aperol,0.5,1
-strawberries,0.5,1
-apple cider vinegar,1.5,2
-scotch bonnet,1,1
-chowchow,1,1
-crimini,1,1
-tender stems,1,1
-dijon mustard,2,2
-flaxseed meal,1,1
-amaranth,1,1
-miso,1,1
-store barbecue sauce,1,1
-hamburger buns,1,1
-chili garlic sauce,1,1
-tamari soy sauce,1,1
-mayonnaise,1,1
-eyed peas,1.5,2
-sauce,0.5,1
-honey,0.5,1
-dill,0.5,1
-onion,0.5,1
-cucumbers,0.5,1
-parmigiano reggiano,0.5,1
-loaf,0.5,1
-turkey giblet stock,0.5,1
-celery ribs,0.5,1
-sausage,0.5,1
-shallow ceramic,0.5,1
-onions,1.0,2
-leaf parsley,0.5,1
-cream,0.5,1
-bird eye chile,0.5,1
-pumpkin,0.5,1
-dates,0.5,1
-canola oil,0.5,1
-sake,0.5,1
-ricotta,0.5,1
-serrano chile,0.5,1
-watermelon,0.5,1
-cayenne,0.5,1
-shiso,0.5,1
-lime wheels,0.5,1
-milliliters earl grey tea,0.5,1
-milliliters grapefruit juice,0.5,1
-milliliters pineapple syrup,0.5,1
-milliliters pot still rum,0.5,1
-chives,1,1
-beans,1,1
-torn peperoncini,1,1
-radishes,1,1
-bibb lettuce,1,1
-basil,1,1
-avocado,1,1
-vanilla,0.5,1
-chocolate chips,0.5,1
-cocoa,0.5,1
-walnuts,0.5,1
-coconut oil,0.5,1
-chiles,0.5,1
-coconut vinegar,0.5,1
-curry,0.5,1
-basmati rice serve,0.5,1
-coconut milk,0.5,1
+lime juice,1.0,6
+tahini,1.0,6
+honey,1.0,7
+soy sauce,1.0,6
+tender stems,1.0,6
+lime,1.0,6
+salt,3.5,21
+sesame,1.0,6
+romaine,1.0,6
+scallions,1.0,6
+pepper flakes,1.0,7
+cucumbers,1.0,6
+cilantro,3.0,15
+buttermilk,0.0,1
+vegetable oil,0.0,1
+cake flour,0.0,1
+pecans,0.0,1
+confectioners sugar,0.0,1
+butter,0.5,4
+food,0.0,1
+sugar,0.0,3
+cream cheese,0.0,1
+soda,0.0,2
+vanilla,0.0,2
+vinegar,0.0,1
+eggs,0.0,2
+agave nectar,0.0,1
+chamomile tea,0.0,1
+reposado tequila,0.0,1
+lemon juice,0.0,1
+cubeb pepper,2.0,9
+onion,2.0,11
+garlic clove,2.0,11
+olive oil,2.0,11
+drunk apricot shito,2.0,9
+spice mill,2.0,9
+puna,2.0,9
+lemon,2.0,9
+okra salt,2.0,9
+chile,2.0,9
+alligator pepper,2.0,9
+ginger,2.0,9
+coconut sugar,2.0,9
+bird chiles,2.0,9
+pepper,2.5,12
+skin on snapper fillets,2.0,9
+chives,0.5,3
+onion potato chips,0.0,1
+yukon potatoes,0.0,1
+dijon mustard,0.0,1
+mayonnaise,0.0,1
+sour cream,0.0,1
+cream,0.0,2
+milk,0.0,2
+almond,0.0,1
+raspberries,0.0,1
+grain mustard,0.0,1
+kombu,0.0,1
+leek,0.0,1
+feta,0.0,1
+shallots,0.0,1
+garlic,0.5,3
+cherry tomatoes,0.0,1
+tomatoes,0.0,1
+oil anchovy fillets,0.0,1
+celery ribs,0.0,1
+carrot,0.0,1
+beans,0.0,1
+juice  lemon,0.0,1
+sherry vinegar,0.0,2
+romano beans,0.0,1
+maple syrup,0.0,1
+bacon,0.0,1
+tomato butter,0.0,1
+oregano,0.5,3
+basil,0.0,1
+sea salt,0.0,1
+cheese,0.0,1
+peppers,0.0,1
+beluga lentils,0.0,1
+flour,0.0,2
+dates,0.0,1
+cheddar,0.0,1
+potatoes,0.0,1
+bread crumbs,0.0,1
+tomato,0.5,1
+shado beni,0.5,2
+thyme,0.5,2
+parsley,0.5,2

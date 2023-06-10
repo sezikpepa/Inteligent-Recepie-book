@@ -3,7 +3,7 @@ import sys
  
 # import PySide2 modules
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QRadioButton
-from PySide6.QtGui import QPalette, QColor, QPixmap
+from PySide6.QtGui import QPalette, QColor, QPixmap, QFont
 
 from Recepie_Creator import Recepie_Creator
 from IngredienceTaker import IngredienceTaker
@@ -123,6 +123,8 @@ class Main_window(QMainWindow):
 
 
 		image = QPixmap(f"{settings.images_path}{recepie.image_name}")
+		image.width = 200
+		image.height = 200
 
 		self.ui_recepie.image.setText(recepie.image_name)
 		self.ui_recepie.image.setPixmap(image)
@@ -143,7 +145,7 @@ class Main_window(QMainWindow):
 	def rating_inserted(self):
 		value = self.sender()
 
-		self.setWindowTitle(value.text())
+		self.setWindowTitle(settings.program_name)
 		text = value.text()
 
 		rating = None
@@ -166,12 +168,14 @@ class Main_window(QMainWindow):
 
 	def basic_setup(self):
 		self.setWindowTitle("Inteligent recepie book")
-		self.setFixedSize(900, 600)
+		self.setFixedSize(1500, 800)
 
 	def layout_setup(self):		
 		self.ui_recepie.name_widget = QLabel()
 		self.ui_recepie.name_widget.setAlignment(Qt.AlignCenter)
 		self.ui_recepie.name_widget.setText("zatím nic")
+		self.ui_recepie.name_widget.setFont(QFont('Arial', 20))
+		self.ui_recepie.name_widget.setWordWrap(True)
 
 		self.ui_recepie.ingredience_widget = QLabel()
 		self.ui_recepie.ingredience_widget.setText("v budoucnu")

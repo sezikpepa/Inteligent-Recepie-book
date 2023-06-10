@@ -9,3 +9,7 @@ images_path = "C:\\Users\sezik\OneDrive - Univerzita Karlova\\projekty\Inteligen
 
 
 favourite_ingrediences_file_name = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\userData\\" + "favourite_ingrediences_file_name.csv"
+recepie_wating_time_file_name = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\userData\\" + "recepie_wating_time_file.csv"
+
+program_name = "Inteligent Recepie Book"
+recepie_waiting_time_days = 15

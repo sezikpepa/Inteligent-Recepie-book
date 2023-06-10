@@ -43,5 +43,9 @@ class Favourite_ingrediences:
 
 			for row in csv_reader:
 				if len(row) == 3:
-					self.sums[row[0]] = int(row[1])
+					try:
+						self.sums[row[0]] = float(row[1])
+					except:
+						print(row[1])
+						print(type(row[1]))
 					self.counts[row[0]] = int(row[2])
