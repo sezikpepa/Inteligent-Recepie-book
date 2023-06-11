@@ -60,7 +60,10 @@ class Recommender:
 
 		denominator = valuex * valuey
 
-		return numerator / denominator
+		try:
+			return numerator / denominator
+		except:
+			return -1000
 		
 
 	def calculate_similarity_ingrediences(self, recepie, matching_pattern):

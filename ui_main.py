@@ -63,7 +63,6 @@ class Main_window(QMainWindow):
 		self.ingredients_values.load_from_file(settings.favourite_ingrediences_file_name)
 
 	def on_get_random_recepie_button(self):
-		print(len(self.recepies))
 		recepie_number = randint(0, len(self.recepies) - 1)
 		self.show_recepie(self.recepies[recepie_number])	
 		self.current_recepie_number = recepie_number	
@@ -71,8 +70,8 @@ class Main_window(QMainWindow):
 		self.enable_stars_buttons()
 
 	def on_get_recommended_recepie_button(self):
+		print(self.ingredients_values.sums)
 		score, recepie, no_data = self.recommender.get_recommendation(self.ingredients_values, 4)
-		print(recepie)
 		self.show_recepie(self.recepies[recepie])	
 		self.current_recepie_number = recepie	
 
@@ -147,6 +146,9 @@ class Main_window(QMainWindow):
 
 		self.ingredients_values.save_to_file(settings.favourite_ingrediences_file_name)
 
+	def on_send_recepie_type_button(self):
+		print(self.send_recepie_type_box.currentText())
+
 
 	def basic_setup(self):
 		self.setWindowTitle("Inteligent recepie book")
@@ -190,6 +192,14 @@ class Main_window(QMainWindow):
 		select_recepie_type_button = QComboBox()
 		select_recepie_type_button.addItems(["salty", "sweet", "green", "drink"])
 
+		self.send_recepie_type_box = QComboBox()
+		self.send_recepie_type_box.addItems(["salty", "sweet", "green", "drink"])
+
+		send_recepie_type_button = QPushButton()
+		send_recepie_type_button.setText("Send feedback")
+		send_recepie_type_button.clicked.connect(self.on_send_recepie_type_button)
+
+
 
 		get_recommendation_button = QPushButton()
 		get_recommendation_button.setText("Get recommendation")
@@ -216,6 +226,8 @@ class Main_window(QMainWindow):
 
 
 		buttons_layout = QHBoxLayout()
+		buttons_layout.addWidget(self.send_recepie_type_box)
+		buttons_layout.addWidget(send_recepie_type_button)
 		buttons_layout.addWidget(select_recepie_type_button)
 		buttons_layout.addWidget(get_recommendation_button)
 		buttons_layout.addWidget(self.get_random_button)

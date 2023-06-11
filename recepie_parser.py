@@ -26,7 +26,7 @@ if __name__ == '__main__':
 		recepie_creator.recepies[i].instructions = process_maker.instructions
 		recepie_creator.recepies[i].ingredience = ingredience_taker.ingredience
 
-		print(recepie_creator.recepies[i])
+		print(f"recepie number {i} loaded")
 
 
 	if os.path.exists(settings.json_data):

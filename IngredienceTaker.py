@@ -139,7 +139,6 @@ class IngredienceTaker:
 
 	def remove_words_with_specific_prefix(self):
 		new_list = []
-		#print(" cream".startswith("all"))
 		for element in self.ingredience:
 			new_list.append(''.join([" " + i + " " for i in element.split(" ") if i[0] == 'u' and i[1] == 'n']))
 
