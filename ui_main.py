@@ -2,7 +2,7 @@
 import sys
  
 # import PySide2 modules
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QRadioButton
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox
 from PySide6.QtGui import QPalette, QColor, QPixmap, QFont
 
 from Recepie_Creator import Recepie_Creator
@@ -204,6 +204,9 @@ class Main_window(QMainWindow):
 		self.ui_recepie.instructions_widget.setWordWrap(True)
 		self.ui_recepie.instructions_widget.setText("uvidime")
 
+		select_recepie_type_button = QComboBox()
+		select_recepie_type_button.addItems(["salty", "sweet", "salat", "drink"])
+
 
 		get_recommendation_button = QPushButton()
 		get_recommendation_button.setText("Get recommendation")
@@ -230,6 +233,7 @@ class Main_window(QMainWindow):
 
 
 		buttons_layout = QHBoxLayout()
+		buttons_layout.addWidget(select_recepie_type_button)
 		buttons_layout.addWidget(get_recommendation_button)
 		buttons_layout.addWidget(self.get_random_button)
 
