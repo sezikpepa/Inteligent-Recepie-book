@@ -205,7 +205,7 @@ class Main_window(QMainWindow):
 		self.ui_recepie.instructions_widget.setText("uvidime")
 
 		select_recepie_type_button = QComboBox()
-		select_recepie_type_button.addItems(["salty", "sweet", "salat", "drink"])
+		select_recepie_type_button.addItems(["salty", "sweet", "green", "drink"])
 
 
 		get_recommendation_button = QPushButton()

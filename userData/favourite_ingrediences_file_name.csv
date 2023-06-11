@@ -1,14 +1,27 @@
-parsley,1,2
-garlic,1,2
-chives,1,2
-thyme,1,2
-oregano,1,2
-shado beni,1,2
-salt,0.5,1
+parsley,1.0,3
+garlic,1.5,5
+chives,1.0,3
+thyme,1.0,3
+oregano,1.0,3
+shado beni,1.0,3
+salt,1.0,3
 milk,0.5,1
 juice  lemons,0.5,1
-morton salt,1,1
-water,1,1
-instant yeast,1,1
-bread flour,1,1
-canola oil,1,1
+morton salt,1.0,3
+water,1.0,3
+instant yeast,1.0,3
+bread flour,1.0,3
+canola oil,1.0,3
+beans,0.5,2
+vegetable oil,0.5,2
+corn tortillas,0.5,2
+onion,0.5,2
+cilantro,0.5,2
+avocado,0.5,2
+chorizo,0.5,2
+sodium chicken broth,0.5,2
+tender stems,0.5,2
+queso fresco,0.5,2
+kahl,1,2
+vodka,1,2
+cream,1,2
