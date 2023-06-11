@@ -2,7 +2,10 @@ import re
 #11156
 class IngredienceTaker:
 	def __init__(self, ingredience: list) -> None:
-		self.ingredience = ingredience 
+		if not isinstance(ingredience, list):
+			raise ValueError(f"ingredience is {type(ingredience)}")
+		
+		self.ingredience = ingredience
 
 	def do_magic(self):
 		self.remove_things_in_brackets()

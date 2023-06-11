@@ -1,27 +1,79 @@
 parsley,1.0,3
-garlic,1.5,5
+garlic,2.5,12
 chives,1.0,3
 thyme,1.0,3
-oregano,1.0,3
+oregano,1.0,4
 shado beni,1.0,3
-salt,1.0,3
+salt,2.0,11
 milk,0.5,1
 juice  lemons,0.5,1
 morton salt,1.0,3
-water,1.0,3
+water,2.0,8
 instant yeast,1.0,3
-bread flour,1.0,3
-canola oil,1.0,3
+bread flour,1.0,4
+canola oil,2.0,8
 beans,0.5,2
-vegetable oil,0.5,2
+vegetable oil,1.5,7
 corn tortillas,0.5,2
-onion,0.5,2
-cilantro,0.5,2
+onion,1.5,8
+cilantro,1.5,8
 avocado,0.5,2
-chorizo,0.5,2
+chorizo,0.5,3
 sodium chicken broth,0.5,2
-tender stems,0.5,2
+tender stems,0.5,3
 queso fresco,0.5,2
-kahl,1,2
-vodka,1,2
-cream,1,2
+kahl,1.0,2
+vodka,1.0,2
+cream,1.0,2
+olive oil,0.0,2
+manchego cheese,0.0,1
+ball mozzarella,0.0,1
+pepper flakes,0.0,1
+cherry tomatoes,0.0,1
+basil,0.0,1
+parmesan,0.0,1
+envelope yeast,0.0,1
+rosemary agrodolce,0.0,1
+pepperoni,0.0,1
+tomatoes,0.0,1
+sugar,1.0,6
+lemon,0.0,1
+wheat flour,0.0,1
+garlic clove,0.0,1
+chard,0.0,1
+or soppressata,0.0,1
+kabocha squash,0,1
+broccolini,0,1
+sodium vegetable broth,0,1
+miso,0,1
+soy sauce,1,6
+maple syrup,0,1
+ginger,0,1
+ramen noodles,0,1
+pepper,1,5
+nutmeg,1,5
+pineapple juice,1,5
+cinnamon,1,5
+racks back ribs,1,5
+pineapple,1,5
+bell pepper,1,5
+apple cider vinegar,1,5
+allspice,1,5
+juice  lime,1,5
+jalape o chiles,1,5
+jalape o chile,1,5
+cascabel,1,5
+wine vinegar,1,5
+habanero chile,1,5
+cayenne pepper,1,5
+cumin,0,1
+corn kernels,0,1
+cheddar cheese,0,1
+beef,0,1
+butter,0,1
+eggs,0,1
+jalape os,0,1
+tomato paste,0,1
+cornmeal,0,1
+sour cream,0,1
+beefsteak tomatoes,0,1

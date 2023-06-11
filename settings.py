@@ -13,3 +13,5 @@ recepie_wating_time_file_name = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova
 
 program_name = "Inteligent Recepie Book"
 recepie_waiting_time_days = 15
+json_data = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\userData\\" + "recepies_parsed.json"
+icon_path = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\projekty\\Inteligent-Recepie-book\\pictures\\" + "icon.jpg"

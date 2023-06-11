@@ -20,11 +20,11 @@ class Recepie_Creator:
 		pass
 
 	def parse_line(self, line: str):
-		splitted_line = line.split(",")
+		splitted_line = line.split("',")
 		return splitted_line
 	
 	def create_recepie(self, row: list):
-		recepie = Recepie(row[1], row[2].split("'"), row[3], row[4] + ".jpg")
+		recepie = Recepie(row[1], row[2].replace("[", "").replace("]", "").replace("', ", "*").replace("'", "").split("*"), row[3], row[4] + ".jpg")
 		return recepie
 	
 	def __str__(self):
