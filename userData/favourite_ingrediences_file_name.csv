@@ -1,7 +1,7 @@
 onion,2.0,6
 salt,5.5,18
 highest olive oil,1.0,2
-pepper,3.5,12
+pepper,4.0,13
 wine vinegar,3.0,6
 florida avocado,1.0,2
 salt chicken broth,1.0,3
@@ -10,7 +10,7 @@ sea salt,1.0,4
 thyme,3.5,8
 parsley,1.0,4
 sage,1.0,5
-olive oil,3.5,10
+olive oil,4.0,11
 onions,3.0,7
 mushrooms,1.0,3
 butter,3.5,12
@@ -101,5 +101,10 @@ pepper flakes,0.0,1
 ginger,0.0,1
 pack pumpkin,0.0,1
 cumin,0.0,1
-trail,1,1
-cinnamon,1,1
+trail,1.0,1
+cinnamon,1.0,1
+olive,0.5,1
+heirloom tomatoes,0.5,1
+coarse salt,0.5,1
+nova scotia salmon,0.5,1
+capers,0.5,1

@@ -34,8 +34,8 @@ class Recepie_type_decider:
 				second_maximum = maximum_value
 				maximum_value = calculated_value
 		
-		if second_maximum > 0.8 * second_maximum:
-			return "not able to decide"
+		#if second_maximum > 0.8 * second_maximum:
+			#return "not able to decide"
 		return recepie_type_name
 			
 

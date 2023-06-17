@@ -18,3 +18,10 @@ icon_path = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\projekty\\Inteligen
 
 
 recepie_type_profiles_path = "C:\\Users\\sezik\\OneDrive - Univerzita Karlova\\projekty\\Inteligent-Recepie-book\\userData\\typeProfiles\\"
+
+
+verbal_rating_to_number = {"good": 1, "neutral": 0.5, "bad": 0}
+
+window_title = "Inteligent recepie book"
+window_width = 1500
+window_height = 800

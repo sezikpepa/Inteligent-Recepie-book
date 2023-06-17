@@ -123,21 +123,13 @@ class Main_window(QMainWindow):
 		self.setWindowTitle(settings.program_name)
 		text = value.text()
 
-		rating = None
-		if text == "good":
-			rating = 1
-		elif text == "neutral":
-			rating = 0.5
-		elif text == "bad":
-			rating = 0
+		rating = settings.verbal_rating_to_number[text]
 
 		self.stars_bad.setEnabled(False)
 		self.stars_neutral.setEnabled(False)
 		self.stars_good.setEnabled(False)
 
 		self.insert_ratings(self.recepies[self.current_recepie_number].ingredience, rating)
-		self.show_ingredience_values()
-
 		self.ingredients_values.save_to_file(settings.favourite_ingrediences_file_name)
 
 	def on_send_recepie_type_button(self):
@@ -150,19 +142,17 @@ class Main_window(QMainWindow):
 
 
 	def basic_setup(self):
-		self.setWindowTitle("Inteligent recepie book")
-		self.setFixedSize(1500, 800)
+		self.setWindowTitle(settings.window_title)
+		self.setFixedSize(settings.window_width, settings.window_height)
 		self.setWindowIcon(QIcon(settings.icon_path))
 
 	def layout_setup(self):		
 		self.ui_recepie.name_widget = QLabel()
 		self.ui_recepie.name_widget.setAlignment(Qt.AlignCenter)
-		self.ui_recepie.name_widget.setText("zatím nic")
 		self.ui_recepie.name_widget.setFont(QFont('Arial', 20))
 		self.ui_recepie.name_widget.setWordWrap(True)
 
 		self.ui_recepie.ingredience_widget = QLabel()
-		self.ui_recepie.ingredience_widget.setText("v budoucnu")
 
 		name_ingredients_layout = QVBoxLayout()
 		name_ingredients_layout.addWidget(self.ui_recepie.name_widget)
@@ -173,7 +163,6 @@ class Main_window(QMainWindow):
 		text.setLayout(name_ingredients_layout)
 
 		self.ui_recepie.image = QLabel()
-		self.ui_recepie.image.setText("tady bude obrázek")
 		
 		topside_layout = QHBoxLayout()
 		topside_layout.addWidget(text)
@@ -186,7 +175,6 @@ class Main_window(QMainWindow):
 		self.ui_recepie.instructions_widget = QLabel()
 		self.ui_recepie.instructions_widget.setFixedWidth(1200)
 		self.ui_recepie.instructions_widget.setWordWrap(True)
-		self.ui_recepie.instructions_widget.setText("uvidime")
 
 		self.select_recepie_type_box = QComboBox()
 		self.select_recepie_type_box.addItems(["salty", "sweet", "green", "drink"])
@@ -270,6 +258,7 @@ app = QApplication(sys.argv)
 mainwindow = Main_window()
 mainwindow.basic_setup()
 mainwindow.layout_setup()
+mainwindow.on_get_random_recepie_button()
 
 # invoke show function
 mainwindow.show()
