@@ -1,4 +1,4 @@
-def list_to_dict_value_appearance(values: list):
+def list_to_dict_value_appearance(values: list) -> dict:
 	if not isinstance(values, list):
 		raise ValueError(f"values is {type(values)}")
 		

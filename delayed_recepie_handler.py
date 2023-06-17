@@ -3,7 +3,7 @@ import csv
 
 class Delayed_recepie_handler:
 	@staticmethod
-	def load_delayed_recepies():
+	def load_delayed_recepies() -> dict:
 		delayed_recepies = {}
 
 		try:
@@ -26,7 +26,7 @@ class Delayed_recepie_handler:
 		return delayed_recepies	
 
 	@staticmethod
-	def store_delay_recepies(delayed_recepies: dict):
+	def store_delay_recepies(delayed_recepies: dict) -> None:
 		if not isinstance(delayed_recepies, dict):
 			raise ValueError(f"delayed_recepies is {type(delayed_recepies)}")
 		

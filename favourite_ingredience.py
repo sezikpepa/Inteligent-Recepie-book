@@ -6,8 +6,7 @@ class Favourite_ingrediences:
 		self.sums = {}
 		self.counts = {}
 
-	def add_rating(self, ingredience, rating):
-
+	def add_rating(self, ingredience, rating) -> None:
 		if ingredience in self.sums:
 			self.sums[ingredience] += rating
 			self.counts[ingredience] += 1

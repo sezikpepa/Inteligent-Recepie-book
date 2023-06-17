@@ -1,42 +1,24 @@
-# import system module
 import sys
- 
-# import PySide2 modules
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox
-from PySide6.QtGui import QPalette, QColor, QPixmap, QFont, QIcon
-
-
-from Reccomender import Recommender
-import numpy as np
-from Ingredience import Ingrediences
-from favourite_ingredience import Favourite_ingrediences
-
 from random import randint
 from copy import deepcopy
+
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox
+from PySide6.QtGui import QPixmap, QFont, QIcon
 from PySide6.QtCore import Qt
 
-from recepie import Recepie
-from recepies_loader_from_json import Recepies_loader_from_json
-
-import datetime
-
-import settings
+import numpy as np
 
 from recepie_type_decider import Recepie_type_decider
 from recepie_type_profile import Recepie_type_profile
-
 from delayed_recepie_handler import Delayed_recepie_handler
+from Reccomender import Recommender
+from Ingredience import Ingrediences
+from favourite_ingredience import Favourite_ingrediences
+from recepie import Recepie
+from recepies_loader_from_json import Recepies_loader_from_json
+import datetime
+import settings
 
-
-class Color(QWidget):
-
-    def __init__(self, color):
-        super(Color, self).__init__()
-        self.setAutoFillBackground(True)
-
-        palette = self.palette()
-        palette.setColor(QPalette.Window, QColor(color))
-        self.setPalette(palette)
 
 class UI_Recepie():
 	def __init__(self):

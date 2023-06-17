@@ -2,7 +2,7 @@ from math import sqrt
 from functools import cache
 
 
-def cosine_compare(values1: dict, values2: dict):
+def cosine_compare(values1: dict, values2: dict) -> float:
 	if not isinstance(values1, dict):
 		raise ValueError(f"values1 is {type(values1)}")
 	
