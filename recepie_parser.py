@@ -8,6 +8,7 @@ import numpy as np
 import settings
 import json
 import os
+from data_manipulation_functions import list_to_dict_value_appearance
 
 if __name__ == '__main__':
 	recepie_creator = Recepie_Creator()
@@ -25,8 +26,9 @@ if __name__ == '__main__':
 
 		recepie_creator.recepies[i].instructions = process_maker.instructions
 		recepie_creator.recepies[i].ingredience = ingredience_taker.ingredience
+		recepie_creator.recepies[i].instructions_appearance = list_to_dict_value_appearance(recepie_creator.recepies[i].instructions)
 
-		print(f"recepie number {i} loaded")
+		print(f"recepie number {i} parsed")
 
 
 	if os.path.exists(settings.json_data):

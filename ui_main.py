@@ -6,12 +6,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, Q
 from PySide6.QtGui import QPalette, QColor, QPixmap, QFont, QIcon
 
 
-from Recepie_Creator import Recepie_Creator
-from IngredienceTaker import IngredienceTaker
-from StatisticsCreator import StatisticsCreator
-from MakingProcessMaker import MakingProcessMaker
 from Reccomender import Recommender
-import pprint
 import numpy as np
 from Ingredience import Ingrediences
 from favourite_ingredience import Favourite_ingrediences
@@ -128,9 +123,7 @@ class Main_window(QMainWindow):
 
 		self.ui_recepie.name_widget.setText(recepie.name)
 		self.ui_recepie.ingredience_widget.setText(str(Ingrediences(recepie.ingredience_full)))
-		#self.ui_recepie.instructions_widget.setText(str(recepie.instructions_full))
-		self.ui_recepie.instructions_widget.setText(str(recepie.instructions))
-
+		self.ui_recepie.instructions_widget.setText(str(recepie.instructions_full))
 
 		image = QPixmap(f"{settings.images_path}{recepie.image_name}")
 		image.width = 200

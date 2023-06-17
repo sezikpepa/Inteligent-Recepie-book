@@ -28,11 +28,11 @@ class Recommender:
 			if i in delayed_recepies.keys():
 				continue
 
-			if self.recepie_type_decider.get_recepie_type(self.recepies[i]) != recepie_type:
-				continue
-
 			value = self.compare_recepies(matching_pattern, self.recepies[i])
 			if max_value < value:
+				if self.recepie_type_decider.get_recepie_type(self.recepies[i]) != recepie_type:
+					continue
+
 				max_value = value
 				that_recepie = i
 

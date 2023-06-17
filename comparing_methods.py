@@ -1,4 +1,5 @@
 from math import sqrt
+from functools import cache
 
 
 def cosine_compare(values1: dict, values2: dict):

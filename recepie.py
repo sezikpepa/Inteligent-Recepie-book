@@ -36,6 +36,7 @@ class Recepie:
 		self.ingredience = recepie_json["ingredience"]
 		self.ingredience_full = recepie_json["ingredience_full"]
 		self.image_name = recepie_json["image_name"]
+		self.instructions_appearance = recepie_json["instructions_appearance"]
 
 	def generate_vector(self):
 		self.vector = {}
@@ -95,5 +96,6 @@ class Recepie:
 			"ingredience_full": self.ingredience_full,
 			"instructions": self.instructions,
 			"instructions_full": self.instructions_full,
+			"instructions_appearance": self.instructions_appearance,
 			"image_name": self.image_name
 		}

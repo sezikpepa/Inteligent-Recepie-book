@@ -23,15 +23,19 @@ class Recepie_type_decider:
 			raise ValueError(f"recepie is {type(recepie)}")
 
 		maximum_value: float = -10000
+		second_maximum: float = -20000
 		recepie_type_name: str = ""
 
 		for recepie_type in self.types.values():
-			calculated_value = cosine_compare(recepie_type.elements, list_to_dict_value_appearance(recepie.instructions))
+			calculated_value = cosine_compare(recepie_type.elements, recepie.instructions_appearance)
 
 			if calculated_value >= maximum_value:
 				recepie_type_name = recepie_type.name
+				second_maximum = maximum_value
 				maximum_value = calculated_value
-
+		
+		#if second_maximum > 0.75 * second_maximum:
+			#return "not able to decide"
 		return recepie_type_name
 			
 
