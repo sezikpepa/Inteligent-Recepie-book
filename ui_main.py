@@ -5,6 +5,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox
 from PySide6.QtGui import QPalette, QColor, QPixmap, QFont, QIcon
 
+
 from Recepie_Creator import Recepie_Creator
 from IngredienceTaker import IngredienceTaker
 from StatisticsCreator import StatisticsCreator
@@ -22,7 +23,14 @@ from PySide6.QtCore import Qt
 from recepie import Recepie
 from recepies_loader_from_json import Recepies_loader_from_json
 
+import datetime
+
 import settings
+
+from recepie_type_decider import Recepie_type_decider
+from recepie_type_profile import Recepie_type_profile
+
+
 
 
 class Color(QWidget):
@@ -62,20 +70,40 @@ class Main_window(QMainWindow):
 		self.recommender = Recommender(self.recepies)
 		self.ingredients_values.load_from_file(settings.favourite_ingrediences_file_name)
 
+		self.delayed_recepies = {}
+
+		self.recepie_type_decider = Recepie_type_decider()
+
+	def enable_recepie_types_ui_elements(self):
+		self.send_recepie_type_box.setEnabled(True)
+		self.send_recepie_type_button.setEnabled(True)
+		
+	def disable_recepie_types_ui_elements(self):
+		self.send_recepie_type_box.setEnabled(False)
+		self.send_recepie_type_button.setEnabled(False)
+
 	def on_get_random_recepie_button(self):
-		recepie_number = randint(0, len(self.recepies) - 1)
+		while True:
+			recepie_number = randint(0, len(self.recepies) - 1)
+			if recepie_number not in self.delayed_recepies.keys():
+				break
 		self.show_recepie(self.recepies[recepie_number])	
 		self.current_recepie_number = recepie_number	
 
+		self.delayed_recepies[recepie_number] = datetime.datetime.now()
+
 		self.enable_stars_buttons()
+		self.enable_recepie_types_ui_elements()
 
 	def on_get_recommended_recepie_button(self):
-		print(self.ingredients_values.sums)
-		score, recepie, no_data = self.recommender.get_recommendation(self.ingredients_values, 4)
-		self.show_recepie(self.recepies[recepie])	
-		self.current_recepie_number = recepie	
+		score, recepie_number, no_data = self.recommender.get_recommendation(self.ingredients_values, 4, self.delayed_recepies, self.select_recepie_type_box.currentText())
+		self.show_recepie(self.recepies[recepie_number])	
+		self.current_recepie_number = recepie_number	
+
+		self.delayed_recepies[recepie_number] = datetime.datetime.now()
 
 		self.enable_stars_buttons()
+		self.enable_recepie_types_ui_elements()
 
 	def enable_stars_buttons(self):
 		self.stars_bad.setEnabled(True)
@@ -100,7 +128,8 @@ class Main_window(QMainWindow):
 
 		self.ui_recepie.name_widget.setText(recepie.name)
 		self.ui_recepie.ingredience_widget.setText(str(Ingrediences(recepie.ingredience_full)))
-		self.ui_recepie.instructions_widget.setText(str(recepie.instructions_full))
+		#self.ui_recepie.instructions_widget.setText(str(recepie.instructions_full))
+		self.ui_recepie.instructions_widget.setText(str(recepie.instructions))
 
 
 		image = QPixmap(f"{settings.images_path}{recepie.image_name}")
@@ -147,7 +176,12 @@ class Main_window(QMainWindow):
 		self.ingredients_values.save_to_file(settings.favourite_ingrediences_file_name)
 
 	def on_send_recepie_type_button(self):
-		print(self.send_recepie_type_box.currentText())
+		self.send_recepie_type_button.setDisabled(True)
+		self.send_recepie_type_box.setDisabled(True)
+
+		self.recepie_type_decider.types[self.send_recepie_type_box.currentText()].add_elements(self.recepies[self.current_recepie_number].instructions)
+
+		print("elements added")
 
 
 	def basic_setup(self):
@@ -189,15 +223,25 @@ class Main_window(QMainWindow):
 		self.ui_recepie.instructions_widget.setWordWrap(True)
 		self.ui_recepie.instructions_widget.setText("uvidime")
 
-		select_recepie_type_button = QComboBox()
-		select_recepie_type_button.addItems(["salty", "sweet", "green", "drink"])
+		self.select_recepie_type_box = QComboBox()
+		self.select_recepie_type_box.addItems(["salty", "sweet", "green", "drink"])
 
 		self.send_recepie_type_box = QComboBox()
 		self.send_recepie_type_box.addItems(["salty", "sweet", "green", "drink"])
 
-		send_recepie_type_button = QPushButton()
-		send_recepie_type_button.setText("Send feedback")
-		send_recepie_type_button.clicked.connect(self.on_send_recepie_type_button)
+		self.recepie_type_decider.add_new_type(Recepie_type_profile("salty"))
+		self.recepie_type_decider.add_new_type(Recepie_type_profile("sweet"))
+		self.recepie_type_decider.add_new_type(Recepie_type_profile("green"))
+		self.recepie_type_decider.add_new_type(Recepie_type_profile("drink"))
+
+		for key in self.recepie_type_decider.types.keys():
+			self.recepie_type_decider.types[key].load_from_file()
+
+		self.recepie_type_decider.types
+
+		self.send_recepie_type_button = QPushButton()
+		self.send_recepie_type_button.setText("Send feedback")
+		self.send_recepie_type_button.clicked.connect(self.on_send_recepie_type_button)
 
 
 
@@ -213,22 +257,29 @@ class Main_window(QMainWindow):
 		self.top_ingrediences.setText("tady budou top ingredience")
 
 		self.stars_good = QPushButton("good", self)
+		self.stars_good.setStyleSheet("background-color: green")
 		self.stars_good.clicked.connect(self.rating_inserted)
 
 		self.stars_neutral = QPushButton("neutral", self)
+		self.stars_neutral.setStyleSheet("background-color: orange")
 		self.stars_neutral.clicked.connect(self.rating_inserted)
 
 		self.stars_bad = QPushButton("bad", self)
+		self.stars_bad.setStyleSheet("background-color: red")
 		self.stars_bad.clicked.connect(self.rating_inserted)
 
 		self.disable_stars_buttons()
+		self.disable_recepie_types_ui_elements()
+
+
+		self.recommender.set_recepie_type_decider(self.recepie_type_decider)
 
 
 
 		buttons_layout = QHBoxLayout()
 		buttons_layout.addWidget(self.send_recepie_type_box)
-		buttons_layout.addWidget(send_recepie_type_button)
-		buttons_layout.addWidget(select_recepie_type_button)
+		buttons_layout.addWidget(self.send_recepie_type_button)
+		buttons_layout.addWidget(self.select_recepie_type_box)
 		buttons_layout.addWidget(get_recommendation_button)
 		buttons_layout.addWidget(self.get_random_button)
 

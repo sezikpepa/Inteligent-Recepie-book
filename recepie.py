@@ -20,6 +20,8 @@ class Recepie:
 		self.instructions: list = []
 		self.ingredience: list = []
 
+		self.instructions_appearance: dict = {}
+
 		self.image_name: str = image_name
 
 		self.vector = {}

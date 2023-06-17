@@ -1,24 +1,35 @@
 from math import sqrt
 from recepie import Recepie
 from favourite_ingredience import Favourite_ingrediences
+from recepie_type_decider import Recepie_type_decider
 
 class Recommender:
 	def __init__(self, recepies) -> None:
 		self.recepies = recepies
+		self.recepie_type_decider = None
+
+	def set_recepie_type_decider(self, recepie_type_decider):
+		if not isinstance(recepie_type_decider, Recepie_type_decider):
+			raise ValueError(f"recepie_type_decider is {type(recepie_type_decider)}")
+		
+		self.recepie_type_decider = recepie_type_decider
 
 
-	def get_recommendation(self, matching_pattern, minimum_ingrediences):
+	def get_recommendation(self, matching_pattern, minimum_ingrediences, delayed_recepies: dict, recepie_type: str):
+		if not isinstance(delayed_recepies, dict):
+			raise ValueError(f"delay_recepies is {type(delayed_recepies)}")
+		if not isinstance(recepie_type, str):
+			raise ValueError(f"recepie_type is {type(recepie_type)}")
+
 		max_value = 0
 		that_recepie = 0
 		that_no_data = 0
 		for i in range(len(self.recepies)):
-			#value, count, no_data = self.calculate_similarity_ingrediences(self.recepies[i], matching_pattern)
+			if i in delayed_recepies.keys():
+				continue
 
-			# if count > 0:
-			# 	if value / count > max_value: #and no_data < 4 and count + no_data >= minimum_ingrediences:
-			# 		max_value = value / count
-			# 		that_recepie = i
-			# 		that_no_data = no_data
+			if self.recepie_type_decider.get_recepie_type(self.recepies[i]) != recepie_type:
+				continue
 
 			value = self.compare_recepies(matching_pattern, self.recepies[i])
 			if max_value < value:

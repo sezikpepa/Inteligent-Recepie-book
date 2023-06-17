@@ -15,14 +15,16 @@ if __name__ == '__main__':
 
 	repeat = len(recepie_creator.recepies)
 	for i in range(repeat):
-		process_maker = MakingProcessMaker(recepie_creator.recepies[i].instructions.split(" "))
-		ingredience_taker = IngredienceTaker(recepie_creator.recepies[i].ingredience)
+		process_maker = MakingProcessMaker(recepie_creator.recepies[i].instructions_full)
+		ingredience_taker = IngredienceTaker(recepie_creator.recepies[i].ingredience_full)
 
 		ingredience_taker.do_magic()
 		process_maker.do_magic()
 
-		recepie_creator.recepies[i].instructions = process_maker.processes
+		recepie_creator.recepies[i].instructions = process_maker.instructions
 		recepie_creator.recepies[i].ingredience = ingredience_taker.ingredience
+
+		print(f"recepie number {i} loaded")
 
 		
 
