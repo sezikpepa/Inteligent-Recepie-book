@@ -1,1 +1,1 @@
-delaye
+delayed

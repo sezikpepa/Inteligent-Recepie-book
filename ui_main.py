@@ -25,7 +25,7 @@ import settings
 from recepie_type_decider import Recepie_type_decider
 from recepie_type_profile import Recepie_type_profile
 
-
+from delayed_recepie_handler import Delayed_recepie_handler
 
 
 class Color(QWidget):
@@ -65,7 +65,7 @@ class Main_window(QMainWindow):
 		self.recommender = Recommender(self.recepies)
 		self.ingredients_values.load_from_file(settings.favourite_ingrediences_file_name)
 
-		self.delayed_recepies = {}
+		self.delayed_recepies = Delayed_recepie_handler.load_delayed_recepies()
 
 		self.recepie_type_decider = Recepie_type_decider()
 
@@ -86,16 +86,19 @@ class Main_window(QMainWindow):
 		self.current_recepie_number = recepie_number	
 
 		self.delayed_recepies[recepie_number] = datetime.datetime.now()
+		Delayed_recepie_handler.store_delay_recepies(self.delayed_recepies)
 
 		self.enable_stars_buttons()
 		self.enable_recepie_types_ui_elements()
 
 	def on_get_recommended_recepie_button(self):
-		score, recepie_number, no_data = self.recommender.get_recommendation(self.ingredients_values, 4, self.delayed_recepies, self.select_recepie_type_box.currentText())
+		score, recepie_number = self.recommender.get_recommendation(self.ingredients_values, 4, self.delayed_recepies, self.select_recepie_type_box.currentText())
 		self.show_recepie(self.recepies[recepie_number])	
 		self.current_recepie_number = recepie_number	
 
 		self.delayed_recepies[recepie_number] = datetime.datetime.now()
+		Delayed_recepie_handler.store_delay_recepies(self.delayed_recepies)
+
 
 		self.enable_stars_buttons()
 		self.enable_recepie_types_ui_elements()
@@ -131,19 +134,6 @@ class Main_window(QMainWindow):
 
 		self.ui_recepie.image.setText(recepie.image_name)
 		self.ui_recepie.image.setPixmap(image)
-
-	def show_ingredience_values(self):
-		result = self.ingredients_values.get_favouritness()
-		keys = list(result.keys())
-		values = list(result.values())
-		sorted_value_index = np.argsort(values)[::-1][:15]
-		sorted_dict = {keys[i]: values[i] for i in sorted_value_index}
-
-		textToShow = ""
-		for element in sorted_dict:
-			textToShow += element + ": " + str(sorted_dict[element]) + "\n"
-
-		self.top_ingrediences.setText(textToShow)
 
 	def rating_inserted(self):
 		value = self.sender()
@@ -246,9 +236,6 @@ class Main_window(QMainWindow):
 		self.get_random_button.setText("Get random recepie")
 		self.get_random_button.clicked.connect(self.on_get_random_recepie_button)
 
-		self.top_ingrediences = QLabel()
-		self.top_ingrediences.setText("tady budou top ingredience")
-
 		self.stars_good = QPushButton("good", self)
 		self.stars_good.setStyleSheet("background-color: green")
 		self.stars_good.clicked.connect(self.rating_inserted)
@@ -288,7 +275,6 @@ class Main_window(QMainWindow):
 		central_layout.addWidget(topside)
 		central_layout.addWidget(self.ui_recepie.instructions_widget)
 		central_layout.addWidget(buttons)
-		central_layout.addWidget(self.top_ingrediences)
 
 		central_widget = QWidget()
 		central_widget.setLayout(central_layout)
@@ -302,13 +288,6 @@ app = QApplication(sys.argv)
 mainwindow = Main_window()
 mainwindow.basic_setup()
 mainwindow.layout_setup()
-
-mainwindow.show_ingredience_values()
-
-
-
-
-
 
 # invoke show function
 mainwindow.show()

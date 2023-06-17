@@ -36,7 +36,7 @@ class Recommender:
 				max_value = value
 				that_recepie = i
 
-		return [max_value, that_recepie, that_no_data]
+		return [max_value, that_recepie]
 	
 	def compare_recepies(self, matching_pattern: dict, recepie: Recepie):
 		if not isinstance(recepie, Recepie):
