@@ -27,4 +27,4 @@ window_width = 1500
 window_height = 800
 
 
-food_cathegories = ["salty", "sweet", "healthy"]
+food_cathegories = ["baking", "frying", "boiling", "noncooked"]

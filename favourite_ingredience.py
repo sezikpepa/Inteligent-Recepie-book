@@ -36,17 +36,24 @@ class Favourite_ingrediences:
 
 
 	def load_from_file(self, file_name: str) -> None:
-		with open(file_name, "r") as file:
-			csv_reader = csv.reader(file, delimiter=",")
+		try:
+			with open(file_name, "r") as file:
+				csv_reader = csv.reader(file, delimiter=",")
 
-			self.sums.clear()
-			self.sums.clear()
+				self.sums.clear()
+				self.sums.clear()
 
-			for row in csv_reader:
-				if len(row) == 3:
-					try:
-						self.sums[row[0]] = float(row[1])
-					except:
-						print(row[1])
-						print(type(row[1]))
-					self.counts[row[0]] = int(row[2])
+				for row in csv_reader:
+					if len(row) == 3:
+						try:
+							self.sums[row[0]] = float(row[1])
+						except:
+							print(row[1])
+							print(type(row[1]))
+						self.counts[row[0]] = int(row[2])
+
+		except FileNotFoundError:
+			with open(file_name, "w") as file:
+				print("File favourite ingrediences was not found")
+				pass
+

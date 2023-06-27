@@ -11,6 +11,9 @@ class Recepie_type_profile:
 
 		self.elements: dict = {}
 
+	def get_number_of_known_words(self):
+		return len(self.elements)
+
 	def add_elements(self, elements: list):
 		if not isinstance(elements, list):
 			raise ValueError(f"elements is {type(elements)}")

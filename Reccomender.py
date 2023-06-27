@@ -22,7 +22,7 @@ class Recommender:
 			raise ValueError(f"recepie_type is {type(recepie_type)}")
 
 		max_value = 0
-		that_recepie = 0
+		that_recepie = -1
 		that_no_data = 0
 		for i in range(len(self.recepies)):
 			if i in delayed_recepies.keys():
@@ -30,11 +30,14 @@ class Recommender:
 
 			value = self.compare_recepies(matching_pattern, self.recepies[i])
 			if max_value < value:
+				
 				if self.recepie_type_decider.get_recepie_type(self.recepies[i]) != recepie_type:
 					continue
 
 				max_value = value
 				that_recepie = i
+
+				print(f"current max value is: {max_value}")
 
 		return [max_value, that_recepie]
 	

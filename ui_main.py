@@ -2,7 +2,7 @@ import sys
 from random import randint
 from copy import deepcopy
 
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox, QMessageBox, QErrorMessage
 from PySide6.QtGui import QPixmap, QFont, QIcon
 from PySide6.QtCore import Qt
 
@@ -75,6 +75,12 @@ class Main_window(QMainWindow):
 
 	def on_get_recommended_recepie_button(self):
 		score, recepie_number = self.recommender.get_recommendation(self.ingredients_values, 4, self.delayed_recepies, self.select_recepie_type_box.currentText())
+
+		if recepie_number == -1:
+			QMessageBox.about(self, "Warning", "We dont have enough information to make a proper validation, please give us more feedback")
+			print("not enough information")
+			return
+
 		self.show_recepie(self.recepies[recepie_number])	
 		self.current_recepie_number = recepie_number	
 
@@ -177,15 +183,13 @@ class Main_window(QMainWindow):
 		self.ui_recepie.instructions_widget.setWordWrap(True)
 
 		self.select_recepie_type_box = QComboBox()
-		self.select_recepie_type_box.addItems(["salty", "sweet", "green", "drink"])
+		self.select_recepie_type_box.addItems(settings.food_cathegories)
 
 		self.send_recepie_type_box = QComboBox()
-		self.send_recepie_type_box.addItems(["salty", "sweet", "green", "drink"])
+		self.send_recepie_type_box.addItems(settings.food_cathegories)
 
-		self.recepie_type_decider.add_new_type(Recepie_type_profile("salty"))
-		self.recepie_type_decider.add_new_type(Recepie_type_profile("sweet"))
-		self.recepie_type_decider.add_new_type(Recepie_type_profile("green"))
-		self.recepie_type_decider.add_new_type(Recepie_type_profile("drink"))
+		for cathegory in settings.food_cathegories:
+			self.recepie_type_decider.add_new_type(Recepie_type_profile(cathegory))
 
 		for key in self.recepie_type_decider.types.keys():
 			self.recepie_type_decider.types[key].load_from_file()
