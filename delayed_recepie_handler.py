@@ -2,7 +2,7 @@ import settings
 import csv
 
 import datetime
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Delayed_recepie_handler:
@@ -21,7 +21,11 @@ class Delayed_recepie_handler:
 					if len(row) != 2:
 						print(f"invalid line {row}")
 						continue
-					delayed_recepies[int(row[0])] = datetime.strptime(row[1], '%Y-%m-%d')
+
+					read_date = datetime.strptime(row[1], '%Y-%m-%d')
+					if datetime.now() - timedelta(settings.recepie_waiting_time_days) < read_date:
+						delayed_recepies[int(row[0])] = datetime.strptime(row[1], '%Y-%m-%d')
+
 			print(delayed_recepies)
 		except FileNotFoundError:
 			print(f"file on {settings.delayed_recepies_file_name} was not found") 

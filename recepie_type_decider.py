@@ -58,7 +58,10 @@ class Recepie_type_decider:
 		if maximum_value < 0.2  * values_sum:
 			return "not able to decide"
 		
-		if maximum_value < 0.4:
+		#if maximum_value * 0.8 < second_maximum:
+			#return "not able to decide"
+		
+		if maximum_value < 0.2:
 			return "not able to decide"
 
 		
