@@ -26,16 +26,37 @@ class Recepie_type_decider:
 		second_maximum: float = -20000
 		recepie_type_name: str = ""
 
+		values_sum = 0
+		calculated_value = 0
+
 		for recepie_type in self.types.values():
-			calculated_value = cosine_compare(recepie_type.elements, recepie.instructions_appearance)
+			try:
+				calculated_value = cosine_compare(recepie_type.elements, recepie.instructions_appearance)
+			except ZeroDivisionError:
+				calculated_value = 0
+
+			values_sum += calculated_value
 
 			if calculated_value >= maximum_value:
 				recepie_type_name = recepie_type.name
 				second_maximum = maximum_value
 				maximum_value = calculated_value
 		
-		#if second_maximum > 0.8 * second_maximum:
+		#if second_maximum > 0.9 * second_maximum:
 			#return "not able to decide"
+
+		if maximum_value < 0.6  * values_sum:
+			return "not able to decide"
+		
+		if maximum_value < 0.2:
+			return "not able to decide"
+
+		
+		print(maximum_value)
+		print(values_sum)
+
+		print()
+
 		return recepie_type_name
 			
 

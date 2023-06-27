@@ -1,12 +1,14 @@
 import csv
 
-
 class Favourite_ingrediences:
 	def __init__(self):
-		self.sums = {}
-		self.counts = {}
+		self.sums: dict = {}
+		self.counts: dict = {}
 
-	def add_rating(self, ingredience, rating) -> None:
+	def add_rating(self, ingredience: str, rating: float) -> None:
+		if not isinstance(ingredience, str):
+			raise ValueError(f"ingredience is {type(ingredience)}")
+
 		if ingredience in self.sums:
 			self.sums[ingredience] += rating
 			self.counts[ingredience] += 1
@@ -15,7 +17,7 @@ class Favourite_ingrediences:
 			self.sums[ingredience] = rating
 			self.counts[ingredience] = 1
 
-	def get_favouritness(self):
+	def get_favouritness(self) -> dict:
 		toReturn = {}
 
 		for element in self.sums:
@@ -23,7 +25,7 @@ class Favourite_ingrediences:
 
 		return toReturn
 	
-	def save_to_file(self, file_name: str):
+	def save_to_file(self, file_name: str) -> None:
 		with open(file_name, "w") as file:
 			csv_writer = csv.writer(file)
 			for key in self.sums.keys():
@@ -33,7 +35,7 @@ class Favourite_ingrediences:
 
 
 
-	def load_from_file(self, file_name: str):
+	def load_from_file(self, file_name: str) -> None:
 		with open(file_name, "r") as file:
 			csv_reader = csv.reader(file, delimiter=",")
 

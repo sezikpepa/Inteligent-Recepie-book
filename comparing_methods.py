@@ -35,7 +35,5 @@ def cosine_compare(values1: dict, values2: dict) -> float:
 
 	denominator = valuex * valuey
 
-	try:
-		return numerator / denominator
-	except:
-		return -1000
+	return numerator / denominator
+

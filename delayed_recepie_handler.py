@@ -1,6 +1,10 @@
 import settings
 import csv
 
+import datetime
+from datetime import datetime
+
+
 class Delayed_recepie_handler:
 	@staticmethod
 	def load_delayed_recepies() -> dict:
@@ -17,8 +21,8 @@ class Delayed_recepie_handler:
 					if len(row) != 2:
 						print(f"invalid line {row}")
 						continue
-					delayed_recepies[int(row[0])] = row[1]
-		
+					delayed_recepies[int(row[0])] = datetime.strptime(row[1], '%Y-%m-%d')
+			print(delayed_recepies)
 		except FileNotFoundError:
 			print(f"file on {settings.delayed_recepies_file_name} was not found") 
 			return {}
@@ -30,12 +34,15 @@ class Delayed_recepie_handler:
 		if not isinstance(delayed_recepies, dict):
 			raise ValueError(f"delayed_recepies is {type(delayed_recepies)}")
 		
+		#if not all(isinstance(value, datetime) for value in delayed_recepies.values()):
+			#raise ValueError(f"value in delayed recepies is not Datetime")
+		
 
 		with open(settings.delayed_recepies_file_name, "w") as writer:
 			csv_writer = csv.writer(writer, delimiter=",")
 
 			for key in delayed_recepies.keys():
-				csv_writer.writerow([key, delayed_recepies[key]])
+				csv_writer.writerow([key, delayed_recepies[key].date()])
 		
 
 
