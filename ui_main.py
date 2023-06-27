@@ -184,9 +184,11 @@ class Main_window(QMainWindow):
 
 		self.select_recepie_type_box = QComboBox()
 		self.select_recepie_type_box.addItems(settings.food_cathegories)
+		self.select_recepie_type_box.addItem("no preference")
 
 		self.send_recepie_type_box = QComboBox()
 		self.send_recepie_type_box.addItems(settings.food_cathegories)
+		
 
 		for cathegory in settings.food_cathegories:
 			self.recepie_type_decider.add_new_type(Recepie_type_profile(cathegory))

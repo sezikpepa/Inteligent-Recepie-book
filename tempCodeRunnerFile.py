@@ -1,1 +1,1 @@
-store_del
+"no preference"
